@@ -8,6 +8,7 @@ git remote set-url origin https://<your-token-paste-here>@github.com/mdazfar2/re
 ## Undo your Previous commits from your github repo
 ```bash
 git reset --hard HEAD~1
+```
 
 ## 🎮 Push Pull Game 
 
