@@ -5,6 +5,10 @@ git remote set-url origin https://<your-token-paste-here>@github.com/mdazfar2/re
 ```
 <br/>
 
+## Undo your Previous commits from your github repo
+```bash
+git reset --hard HEAD~1
+
 ## 🎮 Push Pull Game 
 
 
@@ -23,16 +27,21 @@ git sparse-checkout set <src/assets>
 >`src/assets` instead of this you have to use another file path which you want to copy
 
 <br/>
+
 ### If you need to bring the entire code from any repository
+
 ```bash
 git sparse-checkout disable
 ```
-> Every code will come
+>Every code will come
+
 <br/>
+
 ### Now, if you want all of that code to revert and the code that you entered earlier to remain the same, use this command.
+
 ```bash
-git sparse-checkout init
-```
+ git sparse-checkout init
+ ```
 
 ## Merging from one to another repository
 ```bash
