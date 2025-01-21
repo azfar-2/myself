@@ -3,6 +3,15 @@
 ```bash
 git remote set-url origin https://<your-token-paste-here>@github.com/mdazfar2/repository
 ```
+
+<br/>
+
+### Clone your private repository in any OS
+
+```bash
+git clone https://mdazfar2:<your-token-paste-here>@github.com/mdazfar2/repository.git
+```
+
 <br/>
 
 ## Undo your Previous commits from your github repo
