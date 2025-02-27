@@ -1,16 +1,24 @@
+from dotenv import load_dotenv
+import os
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import pandas as pd
 import time
 
+# Load .env file
+load_dotenv()
+
 # ✅ SMTP Server Details (GoDaddy SMTP)
 SMTP_SERVER = "smtpout.secureserver.net"
 SMTP_PORT = 465  # SSL Port
 
 # ✅ Your Email & Password
-SENDER_EMAIL = "youremail.com"
-SENDER_PASSWORD = "yourpassword-here"  # ⚠️ Replace this with your actual password!
+SENDER_EMAIL = "azfar@helpopshub.com"
+SENDER_PASSWORD = os.getenv("SENDER_EMAIL_PASSWORD")  # Loaded from .env file
+
+if not SENDER_PASSWORD:
+    raise ValueError("⚠️ Error: SENDER_EMAIL_PASSWORD not found in .env file!")
 
 # ✅ CSV File Path (Ensure the file is in the correct location)
 csv_file = "honabro.csv"  # ⚠️ Update the path if needed
