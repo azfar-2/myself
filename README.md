@@ -19,6 +19,15 @@ git clone https://mdazfar2:<your-token-paste-here>@github.com/mdazfar2/repositor
 git reset --hard HEAD~1
 ```
 
+or/
+
+```bash
+git revert a757860
+```
+```bash
+git push origin main
+```
+
 ## 🎮 Push Pull Game 
 
 
