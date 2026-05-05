@@ -28,6 +28,17 @@ git revert a757860
 git push origin main
 ```
 
+
+## changes files all remove folder, files everything
+
+  ```bash
+   git clean -fdxn
+  ```
+
+<br/>
+
+
+
 ## 🎮 Push Pull Game 
 
 
