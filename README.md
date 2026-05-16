@@ -37,47 +37,38 @@ git push origin main
 
 <br/>
 
+---
 
+## If you want to copy your friend’s project into your own new repository while preserving all commit history, follow the steps below.
 
-## 🎮 Push Pull Game 
+- **Manual process** ->
+     - First clone your frnds project and open `.git` folder and thenn open `config` file
+     - You will get code like this:
 
+```ini
+[core]
+	repositoryformatversion = 0
+	filemode = false
+	bare = false
+	logallrefupdates = true
+	symlinks = false
+	ignorecase = true
 
-### If you need to pull a specific file from your GitHub repository.
+[remote "origin"]
+	url = https://github.com/mdazfar2/HelpOps-Hub.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
 
-```bash
-git remote add -f origin https://github.com/mdazfar2/Azure-WebApp-Github-Actions
-```
-```bash
-git config core.sparseCheckout true
-```
-```bash
-git sparse-checkout set <src/assets>
-```
-
->`src/assets` instead of this you have to use another file path which you want to copy
-
-<br/>
-
-### If you need to bring the entire code from any repository
-
-```bash
-git sparse-checkout disable
-```
->Every code will come
-
-<br/>
-
-### Now, if you want all of that code to revert and the code that you entered earlier to remain the same, use this command.
-
-```bash
- git sparse-checkout init
- ```
-
-## Merging from one to another repository
-```bash
-git remote set-url origin https://github.com/ravikant-85/react-app
-```
-```bash
-git merge origin/main  --allow-unrelated-histories
+[branch "main"]
+	remote = origin
+	merge = refs/heads/main
 ```
 
+In this code, the `url` field contains your friend’s repository URL. Replace it with the link of the new repository that you created, that’s it.
+
+Then open the terminal and run:
+
+```bash
+git push -u origin main
+```
+
+All the commit history will appear.
