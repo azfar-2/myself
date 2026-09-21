@@ -72,3 +72,19 @@ git push -u origin main
 ```
 
 All the commit history will appear.
+
+<br/>
+<br/>
+<br/>
+<br/>
+
+---
+
+## If you want all the file names in a folder to be replaced at once, follow the steps below.
+
+- Open PowerShell and then first navigate to the directory of the folder that contains all the files.
+- And suppose all the files have a common name, "azfar," such as azfar94, azfar-73, azfaralam85, azfarypro4, and similar names. If you want to replace "azfar" wherever it appears with "aizz," then use the command below, and the names will be replaced.
+
+```bash
+ Get-ChildItem -Filter "*azfar*" | Rename-Item -NewName { $_.Name -replace 'azfar','aizz' }
+```
