@@ -18,12 +18,19 @@ git clone https://mdazfar2:<your-token-paste-here>@github.com/mdazfar2/repositor
 ```bash
 git reset --hard HEAD~1
 ```
+```bash
+git push --force-with-lease origin main
+```
 
 or/
+<br/>
 
 ```bash
 git revert a757860
 ```
+- then press in keyboard `Esc` , and then `shift`+`:`
+- then write `wq!`
+- and the push your code
 ```bash
 git push origin main
 ```
