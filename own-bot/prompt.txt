@@ -1,0 +1,58 @@
+Hey, I want to replace the default `github-actions[bot]` automated comments and messages on issues and pull requests with my own custom bot named **AzfarAi**. 
+
+I already have the GitHub App **AzfarAi** created and installed across all my repositories, and the repository secrets `AZFARAI_APP_ID` and `AZFARAI_PRIVATE_KEY` are configured.
+
+Please configure GitHub Actions workflows in `.github/workflows/` with the following requirements:
+
+### 1. Bot Identity & Token Generation
+- Use `actions/create-github-app-token@v1` with `AZFARAI_APP_ID` and `AZFARAI_PRIVATE_KEY` to authenticate as **AzfarAi[bot]**.
+- Include a fallback to `${{ secrets.AZFARAI_TOKEN || secrets.GITHUB_TOKEN }}` so the workflow never crashes if secrets are missing.
+- Any automated Git commits should use `AzfarAi[bot]` and `AzfarAi[bot]@users.noreply.github.com`.
+
+### 2. Events & Automated Messages
+Use `actions/github-script@v7` on `issues: [opened, assigned, closed]` and `pull_request_target: [opened, closed]` to handle the following messages:
+1. **Issue Opened (`issues: [opened]`):**
+   ```markdown
+   ## Welcome to [PROJECT_NAME]! 👋
+   Hi @<author>, thanks for opening an issue and helping take [PROJECT_NAME] to the next level! Our maintainers will take a look and respond soon.
+   To help us get started, please check our [Contributing Guidelines]([REPO_URL]/blob/main/CONTRIBUTING.md) and include any useful context, steps to reproduce, or details about the improvement you have in mind.
+   In the meantime, join the community:
+   * ⭐ [Star [PROJECT_NAME]]([REPO_URL]) to support the project
+   * 💬 [Join us on Discord]([DISCORD_LINK]) to connect with other contributors
+   * 💼 [Follow [PROJECT_NAME] on LinkedIn]([LINKEDIN_LINK]) for project updates and announcements
+   ```
+2. **Issue Assigned (`issues: [assigned]`):**
+   - Post: `👤 Issue assigned to @<assignee>.`
+3. **Issue Closed (`issues: [closed]`):**
+   - Post: `✅ This issue has been closed. Thank you for your contribution!`
+4. **Pull Request Opened (`pull_request_target: [opened]`):**
+   ```markdown
+   ## Welcome to [PROJECT_NAME]! 🎉
+   Hi @<author>, thanks for submitting your pull request! A maintainer will review your changes shortly. They may suggest adjustments before approving and merging, so please keep an eye on this thread for feedback.
+   ### 🛠️ Verification Checklist
+   To ensure a smooth review, please make sure you have:
+   * Followed our contribution guidelines and code style
+   * Tested your changes locally
+   * Included relevant documentation or screenshots if applicable
+   In the meantime, join the community:
+   * ⭐ [Star [PROJECT_NAME]]([REPO_URL]) to support the project
+   * 💬 [Join us on Discord]([DISCORD_LINK]) to connect with other contributors
+   * 💼 [Follow [PROJECT_NAME] on LinkedIn]([LINKEDIN_LINK]) for project updates and announcements
+   ```
+5. **Pull Request Merged (`pull_request_target: [closed]` where `merged == true`):**
+   - Post: `🎉 Congratulations, @<author>! Your pull request has been successfully merged. Thank you so much for your contribution!`
+6. **Pull Request Closed Without Merge (`pull_request_target: [closed]` where `merged == false`):**
+   - Post: `This pull request has been closed without being merged. Thank you, @<author>, for your time and contribution!`
+
+### 3. Links & Placeholders for this Repository
+- Project Name: [Enter-project-Name]
+- Repo URL: https://github.com/mdazfar2/Project-Name
+- Discord Link: https://discord.com/invite/UWTrRhqywt
+- LinkedIn Link: https://www.linkedin.com/company/Project-Name
+
+### 4. Important Formatting Rules
+- Do NOT use long hyphens or em dashes (`—`), as they look awkward. Use standard bullet points, colons, or simple dashes instead.
+- Keep the messages concise, readable, and professional.
+- Ensure triggers use `pull_request_target` (not `pull_request`) so fork contributions have token access to post comments.
+
+Please implement or update `.github/workflows/greetings.yml` accordingly.
