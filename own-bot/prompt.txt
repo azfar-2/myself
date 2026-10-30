@@ -44,6 +44,8 @@ Use `actions/github-script@v7` on `issues: [opened, assigned, closed]` and `pull
 6. **Pull Request Closed Without Merge (`pull_request_target: [closed]` where `merged == false`):**
    - Post: `This pull request has been closed without being merged. Thank you, @<author>, for your time and contribution!`
 
+- I mean, you know about this [PROJECT_NAME], right? what is that project_nmae and all ,If you don't, then explore the project to understand exactly what it is and how it works. Based on that, write an amazing Markdown description for the issue, including engaging greetings to make the interaction more welcoming and engaging. Then, do the same for the pull request section by writing an excellent description that keeps the engagement lively and professional. Make sure to implement this properly, alright?
+
 ### 3. Links & Placeholders for this Repository
 - Project Name: [Enter-project-Name]
 - Repo URL: https://github.com/mdazfar2/Project-Name
