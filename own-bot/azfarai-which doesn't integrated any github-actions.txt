@@ -1,0 +1,275 @@
+Hey, I want to set up my custom GitHub automation bot named **AzfarAi** in this repository from scratch.
+
+Currently, this repository does not have any custom GitHub bot configured for automated issue comments, pull request greetings, or contributor interactions.
+
+I want you to introduce **AzfarAi** as the primary GitHub automation bot that handles issue and pull request interactions professionally and consistently across the repository.
+
+Before implementation, thoroughly explore the entire repository to understand the project's purpose, architecture, features, existing GitHub configurations, contribution guidelines, and community links.
+
+I already have the GitHub App **AzfarAi** created and installed across all my repositories, and the following repository secrets are configured:
+
+- `AZFARAI_APP_ID`
+- `AZFARAI_PRIVATE_KEY`
+
+Please implement the complete GitHub Actions automation from scratch inside `.github/workflows/`.
+
+### 1. Bot Identity & Authentication
+
+Configure AzfarAi as the identity for all automated GitHub interactions.
+
+Requirements:
+
+- Use `actions/create-github-app-token@v1` to generate an installation access token.
+- Authenticate using:
+  - `AZFARAI_APP_ID`
+  - `AZFARAI_PRIVATE_KEY`
+- Use the generated token for GitHub API operations.
+- Include a fallback to `${{ secrets.AZFARAI_TOKEN || secrets.GITHUB_TOKEN }}` so the workflow can still authenticate when the custom GitHub App secrets are unavailable.
+- Use `actions/github-script@v7` for automated GitHub comments and interactions.
+- Ensure all automated comments and messages appear under **AzfarAi[bot]**.
+- Any automated Git commits must use:
+  - Name: `AzfarAi[bot]`
+  - Email: `AzfarAi[bot]@users.noreply.github.com`
+- Never hardcode tokens, private keys, or other sensitive credentials.
+- Use the minimum required GitHub Actions permissions.
+
+### 2. GitHub Issues Automation
+
+Create an issue automation workflow that handles the following events:
+
+```yaml
+on:
+  issues:
+    types: [opened, assigned, closed]
+```
+
+Use `actions/github-script@v7` to implement the following functionality.
+
+**A. Issue Opened**
+
+Whenever someone creates a new issue, AzfarAi should automatically post an engaging and professional welcome message.
+
+Explore the actual project and customize the message accordingly.
+
+Use this Markdown structure as a reference:
+
+```markdown
+## Welcome to [PROJECT_NAME]! 👋
+
+Hi @<author>, welcome to the [PROJECT_NAME] community!
+
+Thank you for taking the time to open an issue and helping us improve the project. We genuinely appreciate your interest and contribution.
+
+Our maintainers will review your issue and get back to you as soon as possible.
+
+### 📝 Before We Get Started
+
+To help us understand your issue better, please make sure you've included:
+
+- A clear description of the issue or feature request.
+- Steps to reproduce the problem, if applicable.
+- Expected and actual behavior.
+- Relevant screenshots, logs, or error messages, if available.
+
+Please also take a moment to review our [Contributing Guidelines]([REPO_URL]/blob/main/CONTRIBUTING.md).
+
+### 🌟 Stay Connected
+
+- ⭐ [Star [PROJECT_NAME]]([REPO_URL]) to support the project.
+- 💬 [Join us on Discord]([DISCORD_LINK]) to connect with the community.
+- 💼 [Follow [PROJECT_NAME] on LinkedIn]([LINKEDIN_LINK]) for updates and announcements.
+
+Thank you for being part of our journey!
+
+Happy contributing! 🚀
+```
+
+**B. Issue Assigned**
+
+Whenever an issue is assigned to someone, AzfarAi should post:
+
+`👤 Issue assigned to @<assignee>.`
+
+**C. Issue Closed**
+
+Whenever an issue is closed, AzfarAi should post:
+
+`✅ This issue has been closed. Thank you for your contribution and for helping make [PROJECT_NAME] better!`
+
+### 3. Pull Request Automation
+
+Create a separate pull request automation workflow using:
+
+```yaml
+on:
+  pull_request_target:
+    types: [opened, closed]
+```
+
+Use `actions/github-script@v7` to handle pull request interactions.
+
+**A. Pull Request Opened**
+
+Whenever someone opens a pull request, AzfarAi should automatically welcome the contributor with a professional Markdown message.
+
+```markdown
+## Welcome to [PROJECT_NAME]! 🎉
+
+Hi @<author>, thank you for submitting your pull request!
+
+We truly appreciate the time and effort you've invested in improving [PROJECT_NAME]. Every contribution helps us make the project better.
+
+A maintainer will review your changes shortly and may suggest adjustments before approving and merging.
+
+### 🛠️ Pull Request Verification Checklist
+
+Before the review process begins, please make sure you have:
+
+- Followed the project's contribution guidelines and coding standards.
+- Tested your changes locally.
+- Included relevant documentation or screenshots, wherever applicable.
+- Provided a clear description of your changes and their purpose.
+- Ensured that your changes do not introduce unexpected issues.
+
+### 🌟 Stay Connected
+
+- ⭐ [Star [PROJECT_NAME]]([REPO_URL]) to support the project.
+- 💬 [Join us on Discord]([DISCORD_LINK]) to connect with fellow contributors.
+- 💼 [Follow [PROJECT_NAME] on LinkedIn]([LINKEDIN_LINK]) for project updates.
+
+Thank you for contributing to [PROJECT_NAME]. We look forward to reviewing your work!
+
+Happy contributing! 🚀
+```
+
+**B. Pull Request Merged**
+
+When a pull request is closed with `merged == true`, AzfarAi should post:
+
+`🎉 Congratulations, @<author>! Your pull request has been successfully merged. Thank you so much for your valuable contribution to [PROJECT_NAME]. We truly appreciate your efforts!`
+
+**C. Pull Request Closed Without Merge**
+
+When a pull request is closed with `merged == false`, AzfarAi should post:
+
+`This pull request has been closed without being merged. Thank you, @<author>, for your time, effort, and contribution to [PROJECT_NAME]. We appreciate your interest in improving the project!`
+
+### 4. Project Exploration & Dynamic Customization
+
+This is one of the most important requirements.
+
+Before creating any workflow, thoroughly explore the repository and understand exactly what the project does.
+
+Identify:
+
+- Actual project name.
+- Project purpose and problem it solves.
+- Main features and functionality.
+- Target audience and contributors.
+- Repository URL.
+- Contribution guidelines.
+- Discord and LinkedIn links, if available.
+
+Based on your findings:
+
+- Customize issue greetings according to the actual project's identity.
+- Write attractive, welcoming, and engaging Markdown descriptions.
+- Customize pull request greetings to reflect the project's contribution culture.
+- Make the messages sound natural, friendly, and professional.
+- Avoid generic or irrelevant descriptions.
+- Never invent project information or community links.
+
+### 5. Project Links & Placeholders
+
+Use the following details:
+
+- Project Name: Automatically identify from the repository.
+- Repository URL: Automatically identify the actual GitHub repository URL.
+- Discord Link: `https://discord.com/invite/UWTrRhqywt`
+- LinkedIn Link: `https://www.linkedin.com/company/Project-Name`
+
+Replace all placeholders with actual project information wherever possible.
+
+If a particular community link is unavailable or does not belong to the project, do not include an incorrect or fabricated link.
+
+### 6. GitHub Actions Workflow Structure
+
+Create clean and maintainable workflow files inside `.github/workflows/`.
+
+Prefer the following structure:
+
+```text
+.github/
+└── workflows/
+    ├── greetings.yml
+    └── pull-request-greetings.yml
+```
+
+You can use a different structure if combining the workflows is cleaner and more maintainable.
+
+Requirements:
+
+- Use `actions/checkout@v4` only where repository checkout is actually needed.
+- Use `actions/create-github-app-token@v1` for GitHub App authentication.
+- Use `actions/github-script@v7` for automated comments.
+- Use appropriate event triggers.
+- Configure the required permissions, including `issues: write` and `pull-requests: write`, wherever necessary.
+- Use `pull_request_target`, not `pull_request`, so fork contributions can receive automated comments.
+- Ensure the workflows work for both internal and fork-based contributions.
+- Avoid unnecessary workflow steps and dependencies.
+
+### 7. Security, Reliability & Duplicate Prevention
+
+Make the implementation production-ready.
+
+- Never expose the GitHub App private key or authentication token in logs.
+- Never hardcode secrets.
+- Use the least-privilege permissions possible.
+- Prevent duplicate greetings when workflows are rerun or events are re-triggered.
+- Handle API failures gracefully.
+- Ensure each event posts only its corresponding message.
+- Avoid commenting on pull requests from unrelated issue events.
+- Do not execute untrusted code or check out fork-controlled code using the privileged `pull_request_target` token.
+- Keep the workflows secure against unauthorized modifications and privilege escalation.
+- Ensure the fallback authentication is handled correctly.
+
+### 8. Final Implementation & Verification
+
+After creating the workflows:
+
+1. Verify that all required workflow files exist.
+2. Verify the GitHub App authentication implementation.
+3. Verify the token fallback mechanism.
+4. Verify issue opening, assignment, and closing handlers.
+5. Verify pull request opening and closing handlers.
+6. Verify merged and unmerged pull requests receive different messages.
+7. Verify the AzfarAi bot identity is used for all automated interactions.
+8. Validate YAML syntax.
+9. Check GitHub Actions permissions and workflow compatibility.
+10. Ensure no duplicate or conflicting workflow triggers exist.
+
+Finally, provide a concise summary containing:
+
+- Workflow files created.
+- Features implemented.
+- Events supported.
+- Authentication method.
+- Security measures implemented.
+- Any repository secrets or permissions that still need attention.
+
+### Final Goal
+
+Set up **AzfarAi** completely from scratch as the official automated GitHub bot for this repository.
+
+AzfarAi should handle:
+
+- New issue greetings.
+- Issue assignment notifications.
+- Issue closure messages.
+- New pull request greetings.
+- Pull request merge congratulations.
+- Pull request closure messages.
+
+The implementation must be clean, secure, professional, maintainable, and fully customized according to the actual project.
+
+**Important:** Do not just provide instructions, suggestions, or code snippets. Directly inspect the repository, create the required GitHub Actions workflows, implement everything properly, and verify the final configuration.
